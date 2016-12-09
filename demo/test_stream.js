@@ -27,7 +27,7 @@ t2Model.create(doc, function (err, response) {
     console.log(arguments);
 });
 
-let stream = t2Model.find({}).stream();
+let stream = t2Model.find({},'job love').stream();
 stream.on('data',function( item){
     console.log( "item = %j", item );
     stream.pause();// 暂停流
@@ -39,3 +39,4 @@ stream.on('data',function( item){
 }).on('error', function( err) {
     console.log('err: %j=', err );
 });
+
