@@ -62,9 +62,8 @@ for( let i = 0; i < res.length ; i ++ ){
 }
 console.log("--------------+++++++++++++--------------");
 //setTimeout( null, 3000 );
-console.log( t );// 打印res  没有yyyy 属性
-
-                    console.log( "-----------------------");
+console.log( res );// 打印res  没有yyyy 属性
+console.log( "-----------------------");
 for( let i = 0; i < res.length ; i ++ ){
     console.log( res[i] );// 这样能访问到新加的属性 yyyy
 }
