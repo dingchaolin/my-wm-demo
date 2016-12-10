@@ -53,5 +53,5 @@ let Major = mongoose.model('Major', majorSchema);
 
 Major.find({name:"法语"},'name order genre').exec( function( err, result){
     console.log("=========查询结果===================");
-    console.log( result );// undefined
+    console.log( result );//
 });

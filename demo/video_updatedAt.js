@@ -4,7 +4,6 @@ mongoose.connect("mongodb://10.8.8.8/vicer");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
-
 const videoSchema = new Schema({
     status : String,
     originFile : String,
@@ -139,7 +138,6 @@ stream.on('data',function( item){
         console.log(`处理了 ${count} 条了...`);
     }
     //stream.pause();// 暂停流
-
     Video.update({ _id:item._id.toString() },{ $set: {updatedAt:new Date(item.createdAt)} }).exec( function( err, res){
         if( err ){
             console.log( "+++++++++++++++++++++++++++++++++++++++");
