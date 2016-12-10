@@ -1,48 +1,57 @@
 const mongoose = require('mongoose');
 mongoose.Promise = require('bluebird');
-mongoose.connect("mongodb://10.8.8.8/dclTest");
+mongoose.connect("mongodb://10.8.8.8/allus");
 const Schema = mongoose.Schema;
 const ObjectId = Schema.ObjectId;
 
 
-let t1Schema = new Schema({
-    name: {type: String},
-    age: {type: Number},
-    addr: {type: String}
+const genreSchema = new Schema({
+    name: {
+        type: String,
+        required: true,
+    },
+    price: Number,
+    order: Number,
+    promotion: String,
+    hide: Boolean,
+    partUT: Date, // part update time
+}, {
+    versionKey: false,
 });
 
-let t1Model = mongoose.model("t1", t1Schema);
+let Genre = mongoose.model('Genre', genreSchema);
 
-let t2Schema = new Schema({
-    job: {type: String},
-    love: {type: String},
-    t1Id: {type: mongoose.Schema.Types.ObjectId, ref: "t1"}
+
+const majorSchema = new Schema({
+    genreId: {
+        type: ObjectId,
+        ref: 'Genre',
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    order: Number,
+    price: Number,
+    promotion: String,
+    promotionPicture: String,
+    logo: String,
+    hide: Boolean,
+    description: String,
+    partUT: Date, // part update time
+}, {
+    versionKey: false,
 });
 
-let t2Model = mongoose.model("t2", t2Schema);
+let Major = mongoose.model('Major', majorSchema);
 
-function test1() {
-    let doc = {
-        name: "AAAA",
-        age: 20,
-        addr: "beijing"
-    };
-    t1Model.create(doc, function (err, response) {
-        console.log(typeof response._id);
-        let doc = {
-            job: "chengxuyuan",
-            love: "changge",
-            t1Id: response._id.toString()
-        };
-        t2Model.create(doc, function (err, response) {
-            console.log(arguments);
-        });
-    });
-}
 
-test1();
+// Major.find({name:"法语"},'name order genre').populate('genre','name order').exec( function( err, result){
+//     console.log("=========查询结果===================");
+//     console.log( result );// undefined
+// });
 
-t2Model.find({},'love t1Id').populate('t1Id','name age').exec( function( err, result){
+Major.find({name:"法语"},'name order genre').exec( function( err, result){
     console.log("=========查询结果===================");
-    console.log( result );
+    console.log( result );// undefined
 });
