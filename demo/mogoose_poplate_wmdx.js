@@ -46,12 +46,12 @@ const majorSchema = new Schema({
 let Major = mongoose.model('Major', majorSchema);
 
 
-// Major.find({name:"法语"},'name order genre').populate('genre','name order').exec( function( err, result){
-//     console.log("=========查询结果===================");
-//     console.log( result );// undefined
-// });
-
-Major.find({name:"法语"},'name order genre').exec( function( err, result){
+Major.find({name:"法语"},'name order genre').populate('genre','name order').exec( function( err, result){
     console.log("=========查询结果===================");
-    console.log( result );//
+    console.log( result );// undefined
 });
+
+// Major.find({name:"法语"},'name order genre').exec( function( err, result){
+//     console.log("=========查询结果===================");
+//     console.log( result );//
+// });
